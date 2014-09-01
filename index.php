@@ -18,7 +18,7 @@ while($fila = mysqli_fetch_array($resultado))
 	}
 	echo "<br>";
 	echo "<a href='producto.php?id=".$fila['id']." '><button>Más información</button></a>";
-	echo "<button>Comprar ahora</button>";
+	echo "<button value='".$fila['id']."' class='botoncompra'>Comprar Ahora</button>";
 	echo "</article>";
 }
 mysqli_close($conexion);
