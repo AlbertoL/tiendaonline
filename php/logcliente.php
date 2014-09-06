@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "cabecera.php";
 $contador = 0;
 $conexion = mysqli_connect("localhost", "root", "", "tiendaonline");
 mysqli_set_charset($conexion, "utf8");
@@ -28,10 +28,29 @@ if ($contador > 0)
 
 	$peticion = "INSERT INTO lineaspedido VALUES (NULL,'".$_SESSION['idpedido']."','".$_SESSION['producto'][$i]."','1')";
 	$resultado = mysqli_query($conexion, $peticion);
+
+	$peticion = "SELECT * FROM productos WHERE id= '".$_SESSION['producto'][$i]."'";
+	$resultado = mysqli_query($conexion,$peticion);
+	while ($fila = mysqli_fetch_array($resultado)) {
+		$existencias = $fila['existencias'];
+		$peticion2 = "UPDATE productos SET existencias = ' ".($existencias-1)." ' WHERE id=' ".$_SESSION['producto'][$i]." ' ";
+		$resultado2 = mysqli_query($conexion, $peticion2);
 	}
+
+	}
+	
+	echo "</br>Tu pedido se ha realizado satisfactoriamente. Redirigiendo a la página principal en 5 segundos";
+	session_destroy();
+	echo '
+		<meta http-equiv="refresh" content="5; url=../index.php">
+	';
 }
 else{
-	echo "El usuario no existe";
+	echo "El usuario no existe. Volviendo a la tienda en 5 segundos";
+	echo '
+		<meta http-equiv="refresh" content="5; url=../confirmar.php">
+	';
 }
 mysqli_close($conexion);
+include "piedepagina.php";
 ?>
