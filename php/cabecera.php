@@ -23,6 +23,7 @@ if(!isset($_SESSION['contador'])){$_SESSION['contador'] = 0;}
 			<h2>Subtítulo de la tienda</h2>
 		</header>
 		<section>
+		<div id="contienecarrito">
 		<div id="carrito" style="background:rgb(200,200,200);color:black;">
 			Carrito
 		</div>
@@ -32,3 +33,4 @@ if(!isset($_SESSION['contador'])){$_SESSION['contador'] = 0;}
 		<a href="./confirmar.php">
 			<button>Confirmar Compra</button>
 		</a>
+		</div>
